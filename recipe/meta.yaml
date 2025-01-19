@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-superres-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-superres-{{ version }}.tar.gz
   sha256: d38f98572daac58331ac2dedd4a3e0cd0ad2c4743ac036fd9a9ab12c79f6d2ab
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools
     - setuptools-scm
   run:
@@ -26,7 +26,7 @@ requirements:
     - napari
     - numba            # Imported but not listed as a requirement
     - numpy            # Imported but not listed as a requirement
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - scikit-image     # Imported but not listed as a requirement
     - scipy            # Imported but not listed as a requirement
@@ -42,6 +42,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/napari-superres
